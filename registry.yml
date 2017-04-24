@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  registry:
+    image: registry:2
+    mem_limit: 512m
+    ports:
+      - 5000:5000
+    volumes:
+      - registry-data:/var/lib/registry
+
+volumes:
+  registry-data:

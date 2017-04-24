@@ -1,0 +1,56 @@
+version: '3.1'
+
+services:
+  orderproducer:
+    image: mydomain:5000/orderproducer:0.0.1-SNAPSHOT
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    networks:
+      - demo
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+      update_config:
+        parallelism: 1
+        delay: 10s
+  orderconsumer:
+    image: mydomain:5000/orderconsumer:0.0.1-SNAPSHOT
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    networks:
+      - demo
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+      update_config:
+        parallelism: 1
+        delay: 10s
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - demo
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+
+networks:
+  demo:
+    driver: overlay

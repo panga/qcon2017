@@ -1,0 +1,9 @@
+version: '2.1'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    mem_limit: 512m
+    ports:
+      - "5672:5672"
+      - "15672:15672"

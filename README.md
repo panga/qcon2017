@@ -1,4 +1,5 @@
 # QCon 2017 - Demo
+https://www.slideshare.net/leonardozanivan/qcon-2017-javajvm-com-docker-em-producao-licoes-das-trincheiras
 
 * Run Docker Registry
 ```
